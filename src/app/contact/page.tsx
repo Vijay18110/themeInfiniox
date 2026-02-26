@@ -1,3 +1,4 @@
+ 
 // "use client";
 
 // import { useState } from "react";
@@ -204,14 +205,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, LucideIcon } from "lucide-react";
 import { z } from "zod";
+import { toast } from "react-toastify";
 import SectionHeading from "../components/SectionHeading";
-// 1. Remove useToast and import toast from react-toastify
 
 interface ContactItem {
   icon: LucideIcon;
   label: string;
   value: string;
-  href?: string; // Added for clickability
+  href?: string; 
 }
 
 const contactSchema = z.object({
@@ -221,6 +222,7 @@ const contactSchema = z.object({
   subject: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
+
 type ContactForm = z.infer<typeof contactSchema>;
 
 const contactInfo: ContactItem[] = [
@@ -239,14 +241,12 @@ const contactInfo: ContactItem[] = [
   {
     icon: MapPin,
     label: "Address",
-    value: "123  Lane, Portland, OR 97201",
-    href: "https://maps.google.com/?q=123+Craft+Lane+Portland+OR",
+    value: "123 Lane, Portland, OR 97201",
+    href: "https://maps.google.com",
   },
 ];
-import { toast } from "react-toastify";
 
 export default function Contact() {
-  // 2. Remove the const { toast } = useToast() line
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<ContactForm>({
     name: "",
@@ -255,12 +255,10 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof ContactForm, string>>
-  >({});
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactForm, string>>>({});
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (errors[e.target.name as keyof ContactForm]) {
@@ -274,24 +272,24 @@ export default function Contact() {
     const result = contactSchema.safeParse(form);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
+      
+      // FIX: Changed .errors to .issues to resolve TypeScript build error
+      result.error.issues.forEach((issue) => {
+        if (issue.path[0]) fieldErrors[issue.path[0] as string] = issue.message;
       });
+      
       setErrors(fieldErrors);
       return;
     }
 
     setLoading(true);
     try {
-      // Simulate API call
       await new Promise((r) => setTimeout(r, 1200));
 
-      // 3. Use toast.success for the confirmation
       toast.success("Message sent! We'll get back to you soon.");
 
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (error) {
-      // 4. Use toast.error for catch block
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -311,9 +309,8 @@ export default function Contact() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-6xl mx-auto mt-12">
-          {/* Info Sidebar remains the same... */}
           <div className="space-y-4">
-            {contactInfo.map((info, i) => (
+            {contactInfo.map((info) => (
               <motion.div
                 key={info.label}
                 className="bg-card rounded-xl p-6 border border-border flex items-start gap-4"
@@ -333,7 +330,6 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Form remains the same... */}
           <motion.form
             onSubmit={handleSubmit}
             className="lg:col-span-2 bg-card rounded-2xl p-6 md:p-10 border border-border shadow-sm space-y-6"
@@ -360,14 +356,11 @@ export default function Contact() {
                   className={inputBase}
                 />
                 {errors.email && (
-                  <p className="text-destructive text-xs ml-1">
-                    {errors.email}
-                  </p>
+                  <p className="text-destructive text-xs ml-1">{errors.email}</p>
                 )}
               </div>
             </div>
 
-            {/* Subject and Message fields... */}
             <div className="space-y-2">
               <textarea
                 name="message"
@@ -378,9 +371,7 @@ export default function Contact() {
                 className={`${inputBase} resize-none`}
               />
               {errors.message && (
-                <p className="text-destructive text-xs ml-1">
-                  {errors.message}
-                </p>
+                <p className="text-destructive text-xs ml-1">{errors.message}</p>
               )}
             </div>
 
