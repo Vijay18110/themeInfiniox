@@ -84,10 +84,10 @@ borderTop: "1px dashed #333",
                 <Phone className="h-4 w-4 text-primary" /> 91 – 7715857501 /
                 9324010854
               </div>
-              {/* <div className="flex items-center gap-2 text-sm">
-                <MapPin className="h-4 w-4 text-primary" /> 123 Craft Lane,
-                Portland, OR
-              </div> */}
+              <div className="flex items-center gap-2 text-sm">
+                <MapPin className="h-4 w-4 text-primary" />  NCR Lucknow, Bangalore,Mumbai,Hyderabad
+
+              </div>
             </div>
           </div>
         </div>
