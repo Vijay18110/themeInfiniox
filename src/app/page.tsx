@@ -15,14 +15,15 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-import smartBench from "./assets/product-smart-bench.jpg";
-import woodenToys from "./assets/product-wooden-toys.jpg";
-import furniture from "./assets/product-furniture.jpg";
-import epoxyFurniture from "./assets/product-epoxy-furniture.jpg";
-import epoxyFlooring from "./assets/product-epoxy-flooring.jpg";
+import smartBench from "./assets/aiSmartBench.jpeg";
+import woodenToys from "./assets/woodenToys.jpeg";
+import furniture from "./assets/furniture.jpeg";
+import epoxyFurniture from "./assets/epoxyFurniture.jpeg";
+import epoxyFlooring from "./assets/epoxyFlooring.jpeg";
 import SectionHeading from "./components/SectionHeading";
 import Hero from "./components/Hero/Hero";
-
+import TimelineSection from './components/TimelineSection'
+import FeaturesSection from './components/FeaturesSection/FeaturesSection'
 const services = [
   {
     icon: Armchair,
@@ -75,8 +76,8 @@ const offeredProducts = [
     image: smartBench,
     path: "/product/ai-smart-bench",
   },
-  { name: "Wooden Toys", image: woodenToys, path: "/product/wooden-toys" },
-  { name: "Furniture", image: furniture, path: "/product/furniture" },
+  { name: "Wooden Toys", image: furniture, path: "/product/wooden-toys" },
+  { name: "Furniture", image:  woodenToys, path: "/product/furniture" },
   {
     name: "Epoxy Furniture",
     image: epoxyFurniture,
@@ -102,65 +103,17 @@ export default function Page() {
   return (
     <>
       {/* Hero Section */}
-      {/* <section className="relative h-[85vh] min-h-[500px] flex items-center overflow-hidden">
-        <Image
-          src={heroBanner}
-          alt="Premium epoxy furniture craftsmanship"
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60" />
-
-        <div className="relative container mx-auto px-4 z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-2xl text-white"
-          >
-            <span className="inline-block bg-white/20 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
-              Handcrafted Excellence
-            </span>
-
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Where Art Meets{" "}
-              <span className="text-primary">Craftsmanship</span>
-            </h1>
-
-            <p className="mt-6 text-white/80 text-lg max-w-lg">
-              Premium furniture, epoxy solutions, and innovative smart products
-              designed to transform your spaces.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-2 bg-primary px-7 py-3.5 rounded-lg font-semibold hover:opacity-90 transition"
-              >
-                Explore Products <ChevronRight className="h-4 w-4" />
-              </Link>
-
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 border border-white px-7 py-3.5 rounded-lg font-semibold hover:bg-white/10 transition"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section> */}
+     
       <Hero />
       {/* Our Services */}
       <section className="section-padding">
         <div className="container mx-auto">
           <SectionHeading
-            subtitle="What We Do"
-            title="Our Services"
+            // subtitle="What We Do"
+            title="Our Core Services"
             description="From custom furniture to cutting-edge smart technology, we deliver excellence across every product category."
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((s, i) => (
               <motion.div
                 key={s.title}
@@ -182,10 +135,66 @@ export default function Page() {
                 </p>
               </motion.div>
             ))}
+          </div> */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {offeredProducts.map((product, i) => (
+              <motion.div
+                key={product.name}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <Link
+                  href={product.path}
+                  className="group block rounded-xl overflow-hidden border border-border hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-2 bg-card flex items-center justify-between">
+                    <h3 className="font-display text-lg font-semibold text-foreground">
+                      {product.name}
+                    </h3>
+                    <ChevronRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
+   {/* <section className="section-padding bg-foreground">
+        <div className="container mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 font-display">
+              Ready to Transform Your Space?
+            </h2>
+            <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto">
+              Get in touch with us today for a free consultation and custom
+              quote.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity text-lg"
+            >
+              Contact Us Today <ChevronRight className="h-5 w-5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section> */}
 
+      <TimelineSection />
+      <FeaturesSection  />
       {/* Why Choose Us */}
       <section className="section-padding section-alt">
         <div className="container mx-auto">
@@ -219,73 +228,21 @@ export default function Page() {
       </section>
 
       {/* Offered Products */}
-      <section className="section-padding">
+      {/* <section className="section-padding">
         <div className="container mx-auto">
           <SectionHeading
             subtitle="Our Collection"
             title="Featured Products"
             description="Explore our range of premium products crafted with passion and precision."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {offeredProducts.map((product, i) => (
-              <motion.div
-                key={product.name}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-              >
-                <Link
-                  href={product.path}
-                  className="group block rounded-xl overflow-hidden border border-border hover:shadow-xl transition-shadow duration-300"
-                >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-5 bg-card flex items-center justify-between">
-                    <h3 className="font-display text-lg font-semibold text-foreground">
-                      {product.name}
-                    </h3>
-                    <ChevronRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+        
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
-      <section className="section-padding bg-foreground">
-        <div className="container mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 font-display">
-              Ready to Transform Your Space?
-            </h2>
-            <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto">
-              Get in touch with us today for a free consultation and custom
-              quote.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity text-lg"
-            >
-              Contact Us Today <ChevronRight className="h-5 w-5" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+   
       {/* Services */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((s, i) => (
             <motion.div
@@ -305,7 +262,7 @@ export default function Page() {
             </motion.div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Featured Products */}
     </>

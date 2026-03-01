@@ -1,9 +1,15 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground text-primary-foreground/70">
+    <footer className=" text-foreground"
+    
+    style={{
+borderTop: "1px dashed #333",
+    }}
+    >
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-1">
@@ -11,20 +17,27 @@ export default function Footer() {
               href="/"
               className="font-display text-2xl font-bold text-primary-foreground"
             >
-              <span className="text-primary">Infiniox</span>
+              <Image
+                src="/image.png"
+                alt="Infiniox Logo"
+                width={60}
+                height={40}
+                className="ml-2"
+              />
+              {/* <span className="text-primary">Infiniox</span> */}
             </Link>
             <p className="mt-4 text-sm leading-relaxed">
               Infiniox exceptional furniture, epoxy solutions, and innovative
-              smart products since 2015.
+              smart products since 2024.
             </p>
           </div>
 
           <div>
-            <h4 className="font-display text-primary-foreground font-semibold mb-4">
+            <h4 className="font-display text-foreground font-semibold mb-4">
               Quick Links
             </h4>
             <div className="space-y-2.5">
-              {["Home", "About", "Product", "Contact"].map((item) => (
+              {["Home", "About", "Contact"].map((item) => (
                 <Link
                   key={item}
                   href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
@@ -37,13 +50,14 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-primary-foreground font-semibold mb-4">
+            <h4 className="font-display text-foreground font-semibold mb-4">
               Products
             </h4>
             <div className="space-y-2.5">
               {[
                 { name: "AI Smart Bench", path: "/product/ai-smart-bench" },
                 { name: "Wooden Toys", path: "/product/wooden-toys" },
+                { name: "Furniture", path: "/product/furniture" },
                 { name: "Epoxy Furniture", path: "/product/epoxy-furniture" },
                 { name: "Epoxy Flooring", path: "/product/epoxy-flooring" },
               ].map((item) => (
@@ -59,7 +73,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-primary-foreground font-semibold mb-4">
+            <h4 className="font-display text-foreground font-semibold mb-4">
               Contact Info
             </h4>
             <div className="space-y-3">
@@ -78,7 +92,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-6 text-center text-xs">
+        <div className="border-t border-primary-foreground/10 mt-12 pt-6 text-center text-xs"
+        style={{borderTop:"1px dashed #333"}}
+        >
           © {2025} Infiniox. All rights reserved.
         </div>
       </div>

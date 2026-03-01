@@ -11,7 +11,8 @@ const productLinks = [
   { name: "AI Smart Bench", path: "/product/ai-smart-bench" },
   { name: "Wooden Toys", path: "/product/wooden-toys" },
 
-  { name: "Furniture & Epoxy Furniture", path: "/product/epoxy-furniture" },
+  { name: "Furniture", path: "/product/furniture" },
+  { name: "Epoxy Furniture", path: "/product/epoxy-furniture" },
   { name: "Epoxy Flooring", path: "/product/epoxy-flooring" },
 ];
 
@@ -31,21 +32,28 @@ export default function Header() {
     pathname === path || (path !== "/" && pathname.startsWith(path));
 
   return (
-    <header className="sticky top-0 z-50 bg-foreground/95 backdrop-blur-md border-b /20">
+    // bg-foreground/95
+    <header className="sticky top-0 z-50 bg-background  backdrop-md /20"
+
+    style={{
+borderBottom: "1px dashed #333",
+    }}
+    
+    >
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         {/* Logo */}
         <Link
           href="/"
           className="font-display text-2xl font-bold text-primary-foreground tracking-tight"
         >
-          <span className="text-primary">Infiniox</span>
-          {/* <Image
+          {/* <span className="text-primary">Infiniox</span> */}
+          <Image
             src="/image.png"
             alt="Infiniox Logo"
-            width={40}
+            width={60}
             height={40}
             className="ml-2"
-          /> */}
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -56,8 +64,8 @@ export default function Header() {
                 <button
                   className={`flex items-center gap-1 text-sm font-medium transition-colors ${
                     isActive(link.path)
-                      ? "text-primary"
-                      : "text-primary-foreground/80 hover:text-primary"
+                      ? "text-foreground"
+                      : "text-foreground hover:text--primary-foreground"
                   }`}
                 >
                   {link.name}
@@ -68,8 +76,8 @@ export default function Header() {
                   href={link.path}
                   className={`text-sm font-medium transition-colors ${
                     isActive(link.path)
-                      ? "text-primary"
-                      : "text-primary-foreground/80 hover:text-primary"
+                      ? "text-foreground"
+                      : "text-foreground hover:text-primary"
                   }`}
                 >
                   {link.name}
@@ -97,17 +105,17 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <Link
+        {/* <Link
           href="/login"
           className="hidden md:inline-flex px-5 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
         >
           Sign In
-        </Link>
+        </Link> */}
 
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-primary-foreground"
+          className="md:hidden text-foreground"
         >
           {mobileOpen ? (
             <X className="h-6 w-6" />

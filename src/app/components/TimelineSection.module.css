@@ -1,0 +1,135 @@
+.timelineSection {
+  width: 100%;
+  padding: 2rem 1rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.headerWrap {
+  text-align: center;
+  /* margin-bottom: 5rem; */
+}
+
+.title {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 700;
+  /* margin-top: 0.5rem; */
+}
+
+.canvas {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  /* margin: 2rem 0; */
+}
+
+.curve {
+  width: 100%;
+  height: 100%;
+}
+
+.stepContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  transform: translateX(-50%);
+}
+
+/* Logic for labels ABOVE the path */
+.top {
+  bottom: 55%; /* Adjust based on curve peaks */
+  flex-direction: column;
+}
+
+/* Logic for labels BELOW the path */
+.bottom {
+  top: 55%; /* Adjust based on curve valleys */
+  flex-direction: column-reverse;
+}
+
+.iconBox {
+  background: white;
+  padding: 4px;
+}
+
+.pointerLine {
+  height: 40px;
+  border-left: 2px dashed;
+  /* margin: 5px 0; */
+}
+
+/* Arrowhead for the pointer */
+.top .pointerLine::after {
+  content: "▼";
+  position: absolute;
+  bottom: 30px;
+  font-size: 10px;
+  transform: translateX(-43%);
+}
+
+.bottom .pointerLine::after {
+  content: "▲";
+  position: absolute;
+  top: 30px;
+  font-size: 10px;
+  transform: translateX(-43%);
+}
+
+.label {
+  text-align: center;
+}
+
+.stepTitle {
+  font-weight: 700;
+  color: #27323f;
+  font-size: 1.1rem;
+}
+
+.stepSubtitle {
+  color: #64748b;
+  font-size: 0.85rem;
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.tagline {
+  /* margin-top: 4rem; */
+  color: #10b981;
+  font-weight: 600;
+  text-align: center;
+  max-width: 900px;
+}
+
+/* Responsive: Stack vertically on mobile */
+@media (max-width: 850px) {
+  .canvas {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .curve {
+    display: none;
+  }
+  .stepContainer {
+    position: relative;
+    left: 0 !important;
+    transform: none;
+    width: 100%;
+    flex-direction: row !important;
+    text-align: left;
+  }
+  .label {
+    text-align: left;
+    margin-left: 1rem;
+  }
+  .pointerLine {
+    display: none;
+  }
+}

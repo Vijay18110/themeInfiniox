@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Target, Eye, Heart } from "lucide-react";
 import Image from "next/image"; // Use Next.js Image component
-import heroBanner from "../assets/hero-banner.jpg";
+import heroBanner from "../assets/aboutBanner.jpeg";
 import SectionHeading from "../components/SectionHeading";
 
 const values = [
@@ -28,20 +28,20 @@ export default function About() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center overflow-hidden">
+      <section className="relative h-[50vh] min-h-[500px] flex items-center overflow-hidden">
         <Image
           src={heroBanner}
           alt="About CraftWorks"
           fill // This makes it behave like object-cover background
           priority // Loads this image immediately
-          className="object-cover"
+          className="object-fit-fill object-center " 
         />
         {/* Overlay using your custom gradient variable */}
         <div
           className="absolute inset-0 z-0"
           style={{ background: "var(--hero-gradient)" }}
         />
-
+{/* 
         <div className="relative container mx-auto px-4 text-center z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -58,18 +58,18 @@ export default function About() {
           >
             Discover the story, passion, and people behind CraftWorks.
           </motion.p>
-        </div>
+        </div> */}
       </section>
 
       {/* Story Section */}
       <section className="section-padding bg-background">
         <div className="container mx-auto max-w-4xl">
-          <SectionHeading subtitle="Our Story" title="Crafting Since 2015" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-6 mt-8">
+          <SectionHeading subtitle="Our Story" title="Crafting Since 2024" />
+          <div className="prose prose-lg max-w-none text-muted-foreground space-y-6 mt-2">
             <p>
               CraftWorks was born from a deep passion for woodworking and a
               vision to merge traditional craftsmanship with modern technology.
-              Founded in Portland, Oregon, we started as a small workshop
+                we started as a small workshop
               creating custom furniture for local clients.
             </p>
             <p>

@@ -19,10 +19,10 @@ export default function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className={`mb-14 ${centered ? "text-center" : ""}`}
+      className={`mb-4 ${centered ? "text-center" : ""}`}
     >
       {subtitle && (
-        <span className="inline-block text-primary font-semibold text-sm uppercase tracking-widest mb-2">
+        <span className="inline-block text-primary font-semibold text-sm uppercase tracking-widest">
           {subtitle}
         </span>
       )}
@@ -30,7 +30,7 @@ export default function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-1 text-muted-foreground max-w-2xl mx-auto">
           {description}
         </p>
       )}
